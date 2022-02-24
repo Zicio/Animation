@@ -18,6 +18,7 @@ button {
    height: 60px;
    overflow: hidden;
    box-sizing: border-box;
+   padding: 5px;
 
    .collapse__button {
       @extend %decoration;

@@ -1,9 +1,10 @@
 export default class DOM {
   constructor(element) {
     this.element = element;
+    this.startHeight = document.querySelector('.collapse').offsetHeight;
   }
 
-  static collapse(target) {
+  collapse(target) {
     const box = document.querySelector('.collapse');
     const text = document.querySelector('.collapse__text');
     let boxHeight = box.offsetHeight;
@@ -16,7 +17,9 @@ export default class DOM {
       box.style.height = `${boxHeight}px`;
       if (boxHeight < max) {
         requestAnimationFrame(plusStep);
+        return;
       }
+      box.style.height = 'auto';
     }
 
     if (!target.classList.contains('active')) {
@@ -25,11 +28,11 @@ export default class DOM {
       return;
     }
 
-    const min = boxHeight - textHeight;
+    const { startHeight } = this;
     function minusStep() {
       boxHeight -= stepSize;
       box.style.height = `${boxHeight}px`;
-      if (boxHeight > min) {
+      if (boxHeight > startHeight) {
         requestAnimationFrame(minusStep);
       }
     }
